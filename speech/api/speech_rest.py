@@ -65,7 +65,7 @@ def main(speech_file):
                 'encoding': 'MULAW',  # raw 16-bit signed LE samples
                 'sampleRate': 8000,  # 16 khz
                 # See https://goo.gl/DPeVFW for a list of supported languages.
-                'languageCode': 'en-US',  # a BCP-47 language tag
+                'languageCode': 'en-US',  # a BCP-47 language tag en-US/ja-JP
             },
             'audio': {
                 'content': speech_content.decode('UTF-8')
@@ -74,7 +74,9 @@ def main(speech_file):
     # [END construct_request]
     # [START send_request]
     response = service_request.execute()
-    print(json.dumps(response))
+    
+    # json.dumps(ensure_ascii=False) to disable unicode \uXXXX format
+    print(json.dumps(response, ensure_ascii=False))
     # [END send_request]
 
 # [START run_application]
